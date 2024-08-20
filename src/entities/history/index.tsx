@@ -19,7 +19,7 @@ export default function History() {
   return (
     <Container>
       {[...history].reverse().map(item => (
-        <Result item={item} handleDeleteButton={handleDeleteButton} />
+        <Result key={item.id} item={item} handleDeleteButton={handleDeleteButton} />
       ))}
     </Container>
   );
@@ -32,6 +32,8 @@ const Container = styled.div`
     display: flex;
     flex-direction: column-reverse;
     gap: 20px;
+    overflow: auto;
+    max-height: 580px;
 `;
 
 

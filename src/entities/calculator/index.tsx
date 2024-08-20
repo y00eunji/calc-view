@@ -2,7 +2,7 @@ import Button from '../../components/button';
 import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { HistoryContext } from '../../context/historyContext.tsx';
-import { actions } from '../../utils/actions.ts';
+import { actions } from './utils/actions.ts';
 import {OPERATORS, OperatorsType} from '../../constant/operators.ts';
 
 const CALC_TEXT = ['AC', 'del', '+', '-', '*', '/', '0', '7', '8', '9', '4', '5', '6', '1', '2', '3', '='];
@@ -21,7 +21,9 @@ export default function Buttons({ setInput, inputValue }: ButtonsProps) {
   const { setHistory } = context;
 
   const handleButtonClick = (value: string) => {
-    if (value === 'AC') {
+    if(/[가-힣]/.test(inputValue)) setInput('')
+
+   if (value === 'AC') {
       actions.clickResetBtn({ setInput, setCurrentInput });
     }else if (value === 'del') {
       actions.clickDeleteBtn({ setInput, setCurrentInput , inputValue});

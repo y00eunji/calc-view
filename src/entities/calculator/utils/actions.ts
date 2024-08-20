@@ -1,7 +1,7 @@
 import { Calculator } from 'calc-eunji-utils';
 import { Dispatch, SetStateAction } from 'react';
-import { HistoryType } from '../context/historyContext.tsx';
-import { OPERATORS, OperatorsType } from '../constant/operators';
+import { HistoryType } from '../../../context/historyContext.tsx';
+import { OPERATORS, OperatorsType } from '../../../constant/operators.ts';
 
 type SetInputType = Dispatch<SetStateAction<string>>;
 type SetHistoryType = Dispatch<SetStateAction<HistoryType[]>>;
