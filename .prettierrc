@@ -6,6 +6,5 @@
   "trailingComma": "all",
   "printWidth": 120,
   "parser": "babel",
-  "bracketSpacing": true,
-  "arrowParens": "avoid"
+  "bracketSpacing": true
 }
