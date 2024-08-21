@@ -10,6 +10,9 @@ type Params = {
   setInput: SetInputType;
   setCurrentInput: Dispatch<SetStateAction<string>>;
   setHistory?: SetHistoryType;
+  value?: string;
+  inputValue?: string;
+  currentInput?: string;
 };
 
 const handleInputChange = (
@@ -26,11 +29,11 @@ export const actions = {
     handleInputChange(setInput, setCurrentInput, '');
   },
 
-  clickDeleteBtn: ({setInput,setCurrentInput, inputValue}: Params & { inputValue: string; }): void => {
+  clickDeleteBtn: ({setInput,setCurrentInput, inputValue}: Params & Required<Pick<Params, 'inputValue'>>): void => {
     handleInputChange(setInput, setCurrentInput, inputValue.replace(/.$/, ''));
   },
 
-  clickOperatorBtn: ({value, inputValue, currentInput, setInput, setCurrentInput}: Params & { value: string; inputValue: string; currentInput: string }): void => {
+  clickOperatorBtn: ({value, inputValue, currentInput, setInput, setCurrentInput}: Params & Required<Pick<Params, 'inputValue' | 'currentInput' | 'value'>>): void => {
     if (checkIsNull(inputValue) && checkIsMinusString(value)) {
       handleInputChange(setInput, setCurrentInput, value);
       return;
@@ -54,7 +57,7 @@ export const actions = {
     setCurrentInput(value);
   },
 
-  clickNumberBtn: ({value, inputValue, setInput, setCurrentInput}: Params & { value: string; inputValue: string }): void => {
+  clickNumberBtn: ({value, inputValue, setInput, setCurrentInput}: Params & Required<Pick<Params, 'inputValue' | 'value'>>): void => {
     setInput(prev =>
       (inputValue === '-0' || inputValue === '0')? value
         : (checkIsMinusString(inputValue) && value !== '0') ? '-' + value
@@ -63,7 +66,7 @@ export const actions = {
     setCurrentInput(value);
   },
 
-  clickResultBtn: ({inputValue, setInput, setCurrentInput, setHistory}: Params & { inputValue: string }): void => {
+  clickResultBtn: ({inputValue, setInput, setCurrentInput, setHistory}: Params & Required<Pick<Params, 'inputValue'>>): void => {
     if (checkIsNull(inputValue)) return;
 
     try {
