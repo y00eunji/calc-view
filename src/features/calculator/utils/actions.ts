@@ -30,7 +30,7 @@ export const actions = {
   },
 
   clickDeleteBtn: ({setInput,setCurrentInput, inputValue}: Params & Required<Pick<Params, 'inputValue'>>): void => {
-    handleInputChange(setInput, setCurrentInput, inputValue.replace(/.$/, ''));
+    handleInputChange(setInput, setCurrentInput, /[가-힣]/.test(inputValue)? '' : inputValue.replace(/.$/, ''));
   },
 
   clickOperatorBtn: ({value, inputValue, currentInput, setInput, setCurrentInput}: Params & Required<Pick<Params, 'inputValue' | 'currentInput' | 'value'>>): void => {
