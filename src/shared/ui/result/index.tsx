@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { HistoryType } from '../../context/historyContext.tsx';
+import { HistoryType } from '../../../app/context/historyContext.tsx';
 
 interface  ResultProps {
   item: HistoryType;

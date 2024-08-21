@@ -1,7 +1,7 @@
 import { Calculator } from 'calc-eunji-utils';
 import { Dispatch, SetStateAction } from 'react';
-import { HistoryType } from '../../../context/historyContext.tsx';
-import { OPERATORS, OperatorsType } from '../../../constant/operators.ts';
+import { HistoryType } from '../../../app/context/historyContext.tsx';
+import { OPERATORS, OperatorsType } from '../../../shared/constant/operators.ts';
 import { checkIsMinusString, checkIsNull } from './conditions.ts';
 
 type SetInputType = Dispatch<SetStateAction<string>>;

@@ -1,9 +1,9 @@
-import Button from '../../components/button';
+import Button from '../../shared/ui/button';
 import { useContext, useState } from 'react';
 import styled from 'styled-components';
-import { HistoryContext } from '../../context/historyContext.tsx';
+import { HistoryContext } from '../../app/context/historyContext.tsx';
 import { actions } from './utils/actions.ts';
-import {OPERATORS, OperatorsType} from '../../constant/operators.ts';
+import {OPERATORS, OperatorsType} from '../../shared/constant/operators.ts';
 
 const CALC_TEXT = ['AC', 'del', '+', '-', '*', '/', '0', '7', '8', '9', '4', '5', '6', '1', '2', '3', '='];
 

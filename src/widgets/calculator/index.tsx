@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import CalcView from '../../components/calcView';
+import CalcView from '../../shared/ui/calcView';
 import Buttons from '../../features/calculator';
 
 export default function CalcSection() {

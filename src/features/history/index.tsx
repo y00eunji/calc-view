@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useContext } from 'react';
-import Result from '../../components/result';
-import { HistoryContext, HistoryType } from '../../context/historyContext.tsx';
+import Result from '../../shared/ui/result';
+import { HistoryContext, HistoryType } from '../../app/context/historyContext.tsx';
 
 export default function History() {
   const context = useContext(HistoryContext);
