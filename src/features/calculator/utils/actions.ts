@@ -39,7 +39,7 @@ export const actions = {
       return;
     }
 
-    if (inputValue === "") {
+    if (checkIsNull(inputValue)) {
       handleInputChange(setInput, setCurrentInput, '');
       return;
     }
