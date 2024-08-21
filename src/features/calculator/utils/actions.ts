@@ -2,6 +2,7 @@ import { Calculator } from 'calc-eunji-utils';
 import { Dispatch, SetStateAction } from 'react';
 import { HistoryType } from '../../../context/historyContext.tsx';
 import { OPERATORS, OperatorsType } from '../../../constant/operators.ts';
+import { checkIsMinusString, checkIsNull } from './conditions.ts';
 
 type SetInputType = Dispatch<SetStateAction<string>>;
 type SetHistoryType = Dispatch<SetStateAction<HistoryType[]>>;
@@ -30,7 +31,7 @@ export const actions = {
   },
 
   clickOperatorBtn: ({value, inputValue, currentInput, setInput, setCurrentInput}: Params & { value: string; inputValue: string; currentInput: string }): void => {
-    if (inputValue === "" && value === '-') {
+    if (checkIsNull(inputValue) && checkIsMinusString(value)) {
       handleInputChange(setInput, setCurrentInput, value);
       return;
     }
@@ -40,11 +41,11 @@ export const actions = {
       return;
     }
 
-    if (currentInput === '-' && value === '-') {
+    if (checkIsMinusString(currentInput) && checkIsMinusString(value)) {
       return;
     }
 
-    if (value === '-' && OPERATORS.includes(currentInput as OperatorsType)) {
+    if (checkIsMinusString(value) && OPERATORS.includes(currentInput as OperatorsType)) {
       setInput(prev => prev + value);
     } else {
       setInput(prev => OPERATORS.includes(currentInput as OperatorsType) ? prev.replace(/.$/, value) : prev + value);
@@ -56,14 +57,14 @@ export const actions = {
   clickNumberBtn: ({value, inputValue, setInput, setCurrentInput}: Params & { value: string; inputValue: string }): void => {
     setInput(prev =>
       (inputValue === '-0' || inputValue === '0')? value
-        : (inputValue === '-' && value !== '0') ? '-' + value
+        : (checkIsMinusString(inputValue) && value !== '0') ? '-' + value
           : prev + value
     );
     setCurrentInput(value);
   },
 
   clickResultBtn: ({inputValue, setInput, setCurrentInput, setHistory}: Params & { inputValue: string }): void => {
-    if (inputValue === "") return;
+    if (checkIsNull(inputValue)) return;
 
     try {
       const result = String(Calculator(inputValue));
