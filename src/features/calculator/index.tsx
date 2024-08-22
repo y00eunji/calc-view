@@ -25,13 +25,13 @@ export default function Buttons({ setInput, inputValue }: ButtonsProps) {
 
    if (value === 'AC') {
       actions.clickResetBtn({ setInput, setCurrentInput });
+    }else if (value === '=') {
+     actions.clickResultBtn({ inputValue, setInput, setCurrentInput, setHistory });
+    }else if (OPERATORS.includes(value as OperatorsType)) {
+     actions.clickOperatorBtn({ value, inputValue, currentInput, setInput, setCurrentInput });
     }else if (value === 'del') {
       actions.clickDeleteBtn({ setInput, setCurrentInput , inputValue});
-    }else if (value === '=') {
-      actions.clickResultBtn({ inputValue, setInput, setCurrentInput, setHistory });
-    } else if (OPERATORS.includes(value as OperatorsType)) {
-      actions.clickOperatorBtn({ value, inputValue, currentInput, setInput, setCurrentInput });
-    } else {
+    }else {
       actions.clickNumberBtn({ value, inputValue, setInput, setCurrentInput });
     }
   };
