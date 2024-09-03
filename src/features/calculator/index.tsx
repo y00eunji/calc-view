@@ -23,17 +23,27 @@ export default function Buttons({ setInput, inputValue }: ButtonsProps) {
   const handleButtonClick = (value: string) => {
     if(/[가-힣]/.test(inputValue)) setInput('')
 
-   if (value === 'AC') {
-      actions.clickResetBtn({ setInput, setCurrentInput });
-    }else if (value === '=') {
-     actions.clickResultBtn({ inputValue, setInput, setCurrentInput, setHistory });
-    }else if (OPERATORS.includes(value as OperatorsType)) {
-     actions.clickOperatorBtn({ value, inputValue, currentInput, setInput, setCurrentInput });
-    }else if (value === 'del') {
-      actions.clickDeleteBtn({ setInput, setCurrentInput , inputValue});
-    }else {
-      actions.clickNumberBtn({ value, inputValue, setInput, setCurrentInput });
+    // 코드 리뷰
+    // switch문으로 작성하고 타입이 다른애는 위에서 따로 처리 => 성능상 좋음, 얼리 리턴하기
+    // 컨벤션으로 지정해도 좋음 ->if, switch 사용 경우
+    if(OPERATORS.includes(value as OperatorsType)){
+      actions.clickOperatorBtn({ value, inputValue, currentInput, setInput, setCurrentInput });
+      return;
     }
+
+   switch (value) {
+     case 'AC':
+       actions.clickResetBtn({ setInput, setCurrentInput });
+       break;
+     case '=':
+       actions.clickResultBtn({ inputValue, setInput, setCurrentInput, setHistory });
+       break;
+     case 'del':
+       actions.clickDeleteBtn({ setInput, setCurrentInput , inputValue});
+       break;
+     default:
+       actions.clickNumberBtn({ value, inputValue, setInput, setCurrentInput });
+   }
   };
 
   return <CalcButtons>

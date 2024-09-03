@@ -51,7 +51,11 @@ export const actions = {
     if (checkIsMinusString(value) && OPERATORS.includes(currentInput as OperatorsType)) {
       setInput(prev => prev + value);
     } else {
-      setInput(prev => OPERATORS.includes(currentInput as OperatorsType) ? prev.replace(/.$/, value) : prev + value);
+      if(OPERATORS.includes(inputValue[inputValue.length -2] as OperatorsType) && checkIsMinusString(currentInput) &&  OPERATORS.includes(value as OperatorsType)){
+        return;
+      }else{
+        setInput(prev => OPERATORS.includes(currentInput as OperatorsType) ? prev.replace(/.$/, value) : prev + value);
+      }
     }
 
     setCurrentInput(value);

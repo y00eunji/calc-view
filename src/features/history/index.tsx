@@ -10,30 +10,57 @@ export default function History() {
 
   const { history, setHistory } = context;
 
-  const handleDeleteButton = (id:number) => {
+  const handleDeleteButton = (id: number) => {
     setHistory((prev: HistoryType[]) => {
-      return  prev.filter((item) => item.id !== id)
+      return prev.filter((item) => item.id !== id);
     });
-  }
+  };
+
+  const handleHistoryRestButton = () => {
+    setHistory([]);
+  };
 
   return (
-    <Container>
-      {[...history].reverse().map(item => (
-        <Result key={item.id} item={item} handleDeleteButton={handleDeleteButton} />
-      ))}
-    </Container>
+    <Wrapper>
+      <Container>
+        {[...history].reverse().map((item) => (
+          <Result key={item.id} item={item} handleDeleteButton={handleDeleteButton} />
+        ))}
+      </Container>
+      <ResetButtonWrapper>
+        <ResetButton onClick={handleHistoryRestButton}>{history.length ?? 0}개 기록 초기화</ResetButton>
+      </ResetButtonWrapper>
+    </Wrapper>
   );
 }
 
-const Container = styled.div`
-    width: 50%;
-    border-left: 1px solid white;
-    padding: 20px;
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 20px;
-    overflow: auto;
-    max-height: 580px;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
+const ResetButtonWrapper = styled.div`
+  width: 100%;
+  border-radius: 20px;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+`;
 
+const ResetButton = styled.button`
+  width: 150px;
+  height: 50px;
+  background-color: darkred;
+`;
+
+const Container = styled.div`
+  width: 500px;
+  height: 100%;
+  border-left: 1px solid white;
+  padding: 20px 0 20px 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 20px;
+  overflow: auto;
+  max-height: 580px;
+`;
